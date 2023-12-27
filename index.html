@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>watch with date</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onload="initClock()">
+  <h1>Digital clock!! with Date</h1>
+  <div class="container">
+    <div class="datetime">
+      <div class="clr">
+        <div class="time">
+        <span id="hour">00</span>:
+        <!-- <span>:</span> -->
+        <span id="minutes">00</span>:
+        <!-- <span>:</span> -->
+        <span id="second">00</span>
+        <span id="period">AM</span>
+        </div>
+        <div class="date">
+            <span id="dayname">Day</span>,
+            <span id="month">Month</span>
+            <span id="daynum">00</span>,
+            <span id="year">Year</span>
+        </div>
+      </div>
+    </div> 
+  </div>   
+                             <!-- html code end -->
+    <script type="text/javascript">
+        function clock(){
+        let a=new Date(),
+         hr=a.getHours(),
+         min=a.getMinutes(),
+         sec=a.getSeconds(),
+         session="AM";
+         dname = a.getDay(),
+          mon = a.getMonth(),
+          dnum = a.getDate(),
+          yr = a.getFullYear();
+          
+
+         if(hr >= 12){
+            session = "PM";
+          }
+          if(hr == 0){
+            hr = 12;
+          }
+          if(hr > 12){
+            hr = hr - 12;
+          }
+
+          Number.prototype.pad = function(digits){
+            for(var n = this.toString(); n.length < digits; n = 0 + n);
+            return n;
+          }
+
+          let months = ["January", "February", "March", "April", "May", "June", "July", "Augest", "September", "October", "November", "December"];
+          let week = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+          let ids = ["hour", "minutes", "second", "period", "dayname", "month", "daynum", "year" ];
+          let values = [hr.pad(2), min.pad(2), sec.pad(2), session, week[dname], months[mon], dnum.pad(2), yr];
+          for(var i = 0; i < ids.length; i++)
+          document.getElementById(ids[i]).firstChild.nodeValue = values[i];
+
+
+        }
+        function initClock(){
+                clock();
+                window.setInterval("clock()", 1);
+        }
+  </script>
+
+
+
+
+
+
+    
+</body>
+</html>
